@@ -6,9 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Posts\\' => array($baseDir . '/App/Posts'),
+    'Post\\' => array($baseDir . '/App/Post'),
     'MyFramework\\' => array($vendorDir . '/MyFramework'),
-    'Model\\' => array($vendorDir . '/Model'),
-    'Entity\\' => array($vendorDir . '/Entity'),
+    'Model\\' => array($baseDir . '/App/Repository'),
+    'Entity\\' => array($baseDir . '/App/Entity'),
+    'Default\\' => array($baseDir . '/App'),
     'Config\\' => array($baseDir . '/App/Config'),
+    'App\\' => array($baseDir . '/App'),
 );

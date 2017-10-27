@@ -9,9 +9,11 @@
     "autoload": {
         "psr-4": {
             "MyFramework\\": "vendor/MyFramework",
-            "Posts\\": "App/Posts",
-            "Model\\": "vendor/Model",
-            "Entity\\": "vendor/Entity",
+            "App\\": "App",
+            "Post\\": "App/Post",
+            "Model\\": "App/Repository",
+            "Entity\\": "App/Entity",
+            "Default\\": "App",
             "Config\\": "App/Config"
         }
     },

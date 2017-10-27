@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 
-use \MyFramework\Application;
+use App\Application;
 
 define('ROOT', dirname(__DIR__));
 

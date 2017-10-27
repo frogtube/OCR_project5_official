@@ -9,7 +9,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'Posts\\' => 6,
+            'Post\\' => 5,
         ),
         'M' => 
         array (
@@ -20,16 +20,24 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             'Entity\\' => 7,
         ),
+        'D' => 
+        array (
+            'Default\\' => 8,
+        ),
         'C' => 
         array (
             'Config\\' => 7,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Posts\\' => 
+        'Post\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Posts',
+            0 => __DIR__ . '/../..' . '/App/Post',
         ),
         'MyFramework\\' => 
         array (
@@ -37,15 +45,23 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         ),
         'Model\\' => 
         array (
-            0 => __DIR__ . '/..' . '/Model',
+            0 => __DIR__ . '/../..' . '/App/Repository',
         ),
         'Entity\\' => 
         array (
-            0 => __DIR__ . '/..' . '/Entity',
+            0 => __DIR__ . '/../..' . '/App/Entity',
+        ),
+        'Default\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App',
         ),
         'Config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Config',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 

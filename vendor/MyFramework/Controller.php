@@ -12,14 +12,19 @@ class Controller
     protected $viewPath;
     protected $template;
 
+    public function startTwig()
+    {
+        $loader = new Twig
+    }
+
     public function render($view, $variables = [])
     {
         ob_start();
-        // Allows variables transfer from PostsController (with compact function)
+        // Allows variables transfer from PostController (with compact function)
         extract($variables);
         require($this->viewPath . $view . '.php');
         $content = ob_get_clean();
-        require($this->viewPath . 'Templates/' . $this->template . '.php');
+        require($this->viewPath . $this->template . '.php');
     }
 
     public function notFound()

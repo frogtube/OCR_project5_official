@@ -14,4 +14,3 @@ You can alternatively create your own "Post" table composed of :
   creationDate datetime not null
   modificationDate datetime null
  
- 

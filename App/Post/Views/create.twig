@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Je suis la page new</h1>
-    {% include '_postForm.twig' %}
+    <section id="form">
+        <div class="container">
+            <h2 class="text-center">Nouvel article</h2>
+            <hr class="star-primary">
+            {% include '_postForm.twig' %}
+        </div>
+    </section>
 {% endblock %}

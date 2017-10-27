@@ -6,23 +6,31 @@
 {% endblock %}
 
 {% block content %}
+    <header class="masthead">
+            <div class="container">
+                <div class="intro-text">
+                    <span class="name">Mes articles</span>
+                    <hr class="star-light">
+                </div>
+            </div>
 
-    <h2>Je suis la page index</h2>
+        <a href="post/new" class="btn btn-lg btn-outline">
+            <i class="fa fa-plus"></i>
+            Nouvel article
+        </a>
 
-    <p>Voici les derniers articles</p>
+        <div class="container" id="postList">
 
-        {% for post in posts %}
+            {% for post in posts %}
+                <div class="postDiv">
+                    <h2><a class="postLink" href="../web/post/{{ post.slug }}">{{ post.title }}</a></h2>
+                    <p>{{ post.chapo | striptags}}</p>
+                    <p><i>Mis à jour le {{ post.modificationDate | date("d/m/Y") }} par {{ post.author }}</i></p>
+                </div>
+            {% endfor %}
 
-            <h2><a href="../web/posts/{{ post.slug }}">{{ post.title }}</a></h2>
-            <p>Dernière modification : {{ post.modificationDate }}</p>
-            <p>Auteur : {{ post.author }}</p>
-            <p>Chapo : {{ post.slug }}</p>
-
-        {% endfor %}
-
-    <form action="new">
-        <input type="submit" value="New article" />
-    </form>
+        </div>
+    </header>
 
 {% endblock %}
 

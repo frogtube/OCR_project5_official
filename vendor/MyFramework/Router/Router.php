@@ -1,12 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 03/10/2017
- * Time: 14:35
- */
 
 namespace MyFramework\Router;
+
+// require 'route.php';
 
 
 class Router
@@ -18,20 +14,24 @@ class Router
     {
         $this->url = $url;
     }
+
+    // Save a new route using the method GET
     public function get($path, $callable)
     {
         $route = new Route($path, $callable);
         $this->routes['GET'][] = $route;
     }
+
+    // Save a new route using the method POST
     public function post($path, $callable)
     {
         $route = new Route($path, $callable);
         $this->routes['POST'][] = $route;
     }
 
-    public function run()
+    public function getRouting()
     {
-        // Checking $_SERVER['REQUEST_METHOD'] exists in the routes array
+        // Checking if $_SERVER['REQUEST_METHOD'] exists in the routes array
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']]))
         {
             // if not, an exception is thrown
@@ -46,7 +46,7 @@ class Router
                 return $route->call();
             }
         }
-        throw new RouterException('No matching route');
+        $route->noMatchingRoute();
     }
 
 }

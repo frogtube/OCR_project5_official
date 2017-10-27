@@ -1,13 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 03/10/2017
- * Time: 15:18
- */
 
 namespace MyFramework\Router;
 
+
+use Appdefault\DefaultController;
 
 class Route
 {
@@ -22,11 +18,12 @@ class Route
         $this->callable = $callable;
     }
 
+    // Check matches between url and path
     public function match($url)
     {
-        // initial and final / removed from url
+        // Initial and final '/' are removed from url
         $url = trim($url, '/');
-        // replacing :id parameter by regular expression
+        // Replace :slug parameter by a regular expression
         $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
         // Check match between regex and url ('i' flag for case insensitive). Matches saved into $matches array
         $regex = "#^$path$#i";
@@ -35,16 +32,23 @@ class Route
             // If no matching
             return false;
         }
-        // removes the first entry of the array corresponding to the full url
+        // Remove the first entry of the array corresponding to the full url
         array_shift($matches);
-        // saving the matches
+        // Save the matches
         $this->matches = $matches;
         // Inform Router of the matching
         return true;
     }
 
+    // Call the callable method of the matching url
     public function call()
     {
         return call_user_func_array($this->callable, $this->matches);
+    }
+
+    public function noMatchingRoute()
+    {
+        $controller = new DefaultController();
+        $controller->pageDoesntExists();
     }
 }

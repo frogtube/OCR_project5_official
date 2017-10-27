@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 03/10/2017
- * Time: 14:17
- */
 
 namespace App;
-
 
 use MyFramework\Router\Router;
 use Post\PostController;
@@ -22,6 +15,7 @@ class Application
         $this->name = 'Blog';
     }
 
+    // Call a controller and a specific function upon url
     public function getController()
     {
         // Router Initialization
@@ -30,63 +24,59 @@ class Application
         // Homepage
         $router->get('/', function() {
             $controller = new DefaultController;
-            $controller->home();
+            $controller->home(null);
         });
 
         // Contact form sent
         $router->post('/', function() {
             $controller = new DefaultController;
-            $controller->contact();
+            $controller->contact(null);
         });
 
-        // Create a new article with a form
+        // Create a new blog post with postForm
         $router->get('/post/new', function() {
             $controller = new PostController;
-            $controller->create();
+            $controller->create(null);
         });
 
-        // Saving a new article to database
+        // Saving a new blog post to database
         $router->post('/post/new', function() {
             $controller = new PostController;
             $controller->add();
-            header("Location: ../post/" . $post->slug());
         });
 
-        // Display the full list of articles
+        // Display the full list of blog posts
         $router->get('/posts', function() {
             $controller = new PostController;
             $controller->index();
         });
 
-        // Display a selected article
+        // Display a selected blog post
         $router->get('/post/:slug', function() {
             $controller = new PostController;
             $controller->show();
         });
 
-        // Modifying an article with a form
+        // Modify a blog post with postForm
         $router->get('/post/edit/:slug', function() {
             $controller = new PostController;
-            $controller->update();
+            $controller->update(null);
         });
 
-        // Saving modifications of an article to database
+        // Save modifications of a blog post to database
         $router->post('/post/edit/:slug', function() {
             $controller = new PostController;
             $controller->save();
         });
 
-        // Deleting an article from database
+        // Delete a blog post from database
         $router->post('/post/:slug', function() {
             $controller = new PostController;
             $controller->delete();
         });
 
-
-        $router->run();
+        $router->getRouting();
     }
 
     public function run() { $this->getController(); }
-
-    public function name() { return $this->name; }
 }

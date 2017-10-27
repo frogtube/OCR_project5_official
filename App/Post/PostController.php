@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 05/10/2017
- * Time: 06:36
- */
 
 namespace Post;
 
@@ -14,14 +8,14 @@ use MyFramework\Controller;
 
 class PostController extends Controller
 {
-    protected $viewPath = ROOT . '/App/Post/views';
 
     public function __construct()
     {
-        $this->viewPath;
+        $this->viewPath = ROOT . '/App/Post/views';
         $this->template = 'layout';
     }
 
+    // Display the list of blog posts
     public function index()
     {
         $db = new PostManager();
@@ -29,6 +23,7 @@ class PostController extends Controller
         $this->startTwig($this->viewPath, 'index.twig', $posts, 'posts','Ugo Pradère | Blog', null);
     }
 
+    // Display a single blog post
     public function show()
     {
         // Getting slug from url
@@ -46,45 +41,76 @@ class PostController extends Controller
         }
     }
 
-    public function update()
+    // Display the postForm with blog post infos filled in for modification and update
+    public function update($post)
     {
+        if($post == null)
+        {
+            $slug = str_replace('post/edit/', '', $_GET['url']);
+            $db = new PostManager();
+            $post = $db->getUnique($slug);
+        }
         // Getting slug from url
-        $slug = str_replace('post/edit/', '', $_GET['url']);
-        $db = new PostManager();
-        $post = $db->getUnique($slug);
         if(!$post == null)
         {
+            if(!isset($slug))
+            {
+                $slug = $_POST['slug'];
+            }
             $this->startTwig($this->viewPath,'modify.twig', $post, 'post', 'Ugo Pradère | ' . $slug, '../../');
         }
         else
-        {// If null is returned
+        {
+            // If null is returned
             $this->notFound();
         }
     }
 
-    public function create()
-    {
-        $this->startTwig($this->viewPath,'create.twig', null, null,'Ugo Pradère | New article', '../');
-    }
-
+    // Send a request to save the updated blog post to database
     public function save()
     {
         $_POST['slug'] = str_replace(' ', '-', $_POST['title']);
         $post = new Post($_POST);
-        $db = new PostManager();
-        $db->executeSave($post);
-        header("Location: ../../post/" . $post->slug());
+        if($post->isValid())
+        {
+            $db = new PostManager();
+            $db->executeSave($post);
+            // Redirect to the page displaying the article
+            header("Location: ../../post/" . $post->slug());
+        }
+        else
+        {
+            $_POST['errors'] = $post->getErrors();
+            $this->update($_POST);
+        }
     }
 
+    // Display an empty postForm for writing a new blog post
+    public function create($post)
+    {
+        $this->startTwig($this->viewPath,'create.twig', $post, 'post','Ugo Pradère | New article', '../');
+    }
+
+    // Send a request to add the new blog post to database
     public function add()
     {
         $_POST['slug'] = str_replace(' ', '-', $_POST['title']);
         $post = new Post($_POST);
-        $db = new PostManager();
-        $db->executeAdd($post);
-        header("Location: ../post/" . $post->slug());
+        if($post->isValid())
+        {
+            $db = new PostManager();
+            $db->executeAdd($post);
+            // Redirect to the page displaying the article
+            header("Location: ../post/" . $post->slug());
+        }
+        else
+        {
+            $_POST['errors'] = $post->getErrors();
+            $this->create($_POST);
+        }
     }
 
+    // Send a request to delete a blog post in database
     public function delete()
     {
         $post = new Post($_POST);

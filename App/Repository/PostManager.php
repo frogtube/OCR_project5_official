@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ugo-fixe
- * Date: 06/10/2017
- * Time: 15:14
- */
 
 namespace Model;
 
@@ -14,6 +8,7 @@ use MyFramework\PDOFactory;
 class PostManager extends PDOFactory
 {
 
+    // Collect all the blog posts in database
     public function getList()
     {
         $req = $this->getPDO()->query('SELECT * FROM post ORDER BY creationDate DESC');
@@ -22,6 +17,7 @@ class PostManager extends PDOFactory
         return $data;
     }
 
+    // Collect the requested blog post in database
     public function getUnique($slug)
     {
         $req = $this->getPDO()->prepare('SELECT * FROM post WHERE slug = :slug');
@@ -37,11 +33,7 @@ class PostManager extends PDOFactory
 
     }
 
-    public function delete($slug)
-    {
-        $this->getPDO()->exec('DELETE FROM post WHERE id = '.(string) $slug);
-    }
-
+    // Save an updated blog post in database
     public function executeSave($post)
     {
 
@@ -61,6 +53,7 @@ class PostManager extends PDOFactory
         $req->execute();
     }
 
+    // Save a new blog post in database
     public function executeAdd($post)
     {
         $req = $this->getPDO()->prepare('
@@ -77,6 +70,7 @@ class PostManager extends PDOFactory
         $req->execute();
     }
 
+    // Delete a specific blog post in database
     public function executeDelete($post)
     {
         $this->getPDO()->exec('DELETE FROM post WHERE id = '.(int) $post->id());

@@ -23,7 +23,7 @@ namespace Posts\Views\Templates;
 </head>
 
 <body>
-<!--
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -31,7 +31,6 @@ namespace Posts\Views\Templates;
         </div>
     </div>
 </nav>
--->
 
 <div class="container">
 

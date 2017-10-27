@@ -1,6 +1,5 @@
 <?php
 
-
 namespace MyFramework;
 
 use Config\Config;

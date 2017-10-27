@@ -4,27 +4,56 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit94df5a79dd51f49582a074bf416fc1ac
+class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
 {
     public static $prefixLengthsPsr4 = array (
-        'A' => 
+        'P' => 
         array (
-            'App\\' => 4,
+            'Posts\\' => 6,
+        ),
+        'M' => 
+        array (
+            'MyFramework\\' => 12,
+            'Model\\' => 6,
+        ),
+        'E' => 
+        array (
+            'Entity\\' => 7,
+        ),
+        'C' => 
+        array (
+            'Config\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'App\\' => 
+        'Posts\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App',
+            0 => __DIR__ . '/../..' . '/App/Posts',
+        ),
+        'MyFramework\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/MyFramework',
+        ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/Model',
+        ),
+        'Entity\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/Entity',
+        ),
+        'Config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Config',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit94df5a79dd51f49582a074bf416fc1ac::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit94df5a79dd51f49582a074bf416fc1ac::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

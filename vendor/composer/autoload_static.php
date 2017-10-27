@@ -20,6 +20,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             'Services\\' => 9,
         ),
+
         'P' => 
         array (
             'Post\\' => 5,
@@ -33,6 +34,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             'Entity\\' => 7,
         ),
+
         'C' => 
         array (
             'Config\\' => 7,
@@ -107,7 +109,6 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
             $loader->prefixLengthsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixesPsr0;
-
         }, null, ClassLoader::class);
     }
 }

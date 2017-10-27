@@ -47,13 +47,13 @@ class PostManager extends PDOFactory
         $req->bindValue(':author', $post->author());
         $req->bindValue(':title', $post->title());
         $req->bindValue(':chapo', $post->chapo());
+
         $req->bindValue(':slug', (string) $post->slug(), \PDO::PARAM_STR);
         $req->bindValue(':content', $post->content());
 
         $req->execute();
     }
 
-    // Save a new blog post in database
     public function executeAdd($post)
     {
         $req = $this->getPDO()->prepare('

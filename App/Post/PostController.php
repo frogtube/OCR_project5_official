@@ -16,6 +16,7 @@ class PostController extends Controller
     }
 
     // Display the list of blog posts
+
     public function index()
     {
         $db = new PostManager();

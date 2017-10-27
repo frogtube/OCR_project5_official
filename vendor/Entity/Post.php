@@ -1,0 +1,157 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ugo-fixe
+ * Date: 06/10/2017
+ * Time: 16:08
+ */
+
+namespace Entity;
+
+
+class Post
+{
+
+    protected $id;
+    protected $author;
+    protected $title;
+    protected $content;
+    protected $slug;
+    protected $creationDate;
+    protected $modificationDate;
+
+    public function __construct(array $data = [])
+    {
+        if (!empty($data))
+        {
+            $this->hydrate($data);
+        }
+    }
+
+    public function isValid()
+    {
+        return !(empty($this->author) || empty($this->title) || empty($this->content) || empty($this->slug));
+    }
+
+    public function isNew()
+    {
+        return empty($this->id);
+    }
+
+    public function id() { return $this->id; }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    /**
+     * @return mixed
+     */
+    public function author()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function title()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function content()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function slug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function creationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param mixed $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function modificationDate()
+    {
+        return $this->modificationDate;
+    }
+
+    /**
+     * @param mixed $modificationDate
+     */
+    public function setModificationDate($modificationDate)
+    {
+        $this->modificationDate = $modificationDate;
+    }
+
+    private function hydrate($data)
+    {
+        foreach ($data as $key => $value)
+        {
+            $method = 'set'.ucfirst($key);
+
+            if (is_callable([$this, $method]))
+            {
+                $this->$method($value);
+            }
+        }
+    }
+
+
+}

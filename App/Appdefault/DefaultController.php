@@ -4,11 +4,11 @@ namespace Appdefault;
 
 
 use Entity\Email;
+
 use MyFramework\Controller;
 
 class DefaultController extends Controller
 {
-
     public function __construct()
     {
         $this->viewPath = ROOT . '/App/AppDefault/views';

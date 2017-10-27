@@ -6,23 +6,25 @@
  * Time: 11:31
  */
 
+
 namespace MyFramework;
 
+use Config\Config;
 
 class PDOFactory
 {
     private $db_name;
-    protected $db_username;
-    protected $db_password;
-    protected $db_host;
-    protected $pdo;
+    private $db_username;
+    private $db_password;
+    private $db_host;
+    private $pdo;
 
-    public function __construct($db_name, $db_username, $db_password, $db_host)
+    public function __construct()
     {
-        $this->db_name = $db_name;
-        $this->db_username = $db_username;
-        $this->db_password = $db_password;
-        $this->db_host = $db_host;
+        $this->db_name = Config::getDbName();
+        $this->db_username = Config::getDbUsername();
+        $this->db_password = Config::getDbPassword();
+        $this->db_host = Config::getDbHost();
     }
 
     // Connexion to database

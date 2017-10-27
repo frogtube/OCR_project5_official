@@ -6,23 +6,23 @@
  * Time: 06:36
  */
 
-namespace Posts;
+namespace Post;
 
 use Entity\Post;
-use Model\PostsManager;
+use Model\PostManager;
 use MyFramework\Controller;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     public function __construct()
     {
-        $this->viewPath = ROOT . '/App/Posts/Views/';
+        $this->viewPath = ROOT . '/App/Post/Views/';
         $this->template = 'layout';
     }
 
     public function index()
     {
-        $db = new PostsManager();
+        $db = new PostManager();
         $posts = $db->getList();
         // Compact function allows variables transfer
         $this->render('index', compact('posts'));
@@ -32,7 +32,7 @@ class PostsController extends Controller
     {
         // Getting slug from url
         $slug = str_replace('posts/', '', $_GET['url']);
-        $db = new PostsManager();
+        $db = new PostManager();
         $post = $db->getUnique($slug);
         if(!$post == null)
         {
@@ -49,7 +49,7 @@ class PostsController extends Controller
     {
         // Getting slug from url
         $slug = str_replace('posts/edit/', '', $_GET['url']);
-        $db = new PostsManager();
+        $db = new PostManager();
         $post = $db->getUnique($slug);
         if(!$post == null)
         {
@@ -70,7 +70,7 @@ class PostsController extends Controller
     public function save()
     {
         $post = new Post($_POST);
-        $db = new PostsManager();
+        $db = new PostManager();
         $db->executeSave($post);
         header("Location: ../../posts/" . $post->slug());
     }
@@ -78,7 +78,7 @@ class PostsController extends Controller
     public function add()
     {
         $post = new Post($_POST);
-        $db = new PostsManager();
+        $db = new PostManager();
         $db->executeAdd($post);
         header("Location: ../web/posts/" . $post->slug());
 
@@ -87,7 +87,7 @@ class PostsController extends Controller
     public function delete()
     {
         $post = new Post($_POST);
-        $db = new PostsManager();
+        $db = new PostManager();
         $db->executeDelete($post);
         header("Location: ../posts");
     }

@@ -1,13 +1,21 @@
 {
-    "name": "frogtube/myfirstblog",
+    "name": "ugo/mvc",
     "authors": [
         {
             "name": "frogtube",
             "email": "u.pradere@gmail.com"
         }
     ],
-    "require": {},
     "autoload": {
-        "psr-4" : {"App\\" : "App"}
-    }
+        "psr-4": {
+            "MyFramework\\": "vendor/MyFramework",
+            "App\\": "App",
+            "Post\\": "App/Post",
+            "Model\\": "App/Repository",
+            "Entity\\": "App/Entity",
+            "Default\\": "App",
+            "Config\\": "App/Config"
+        }
+    },
+    "require": {}
 }

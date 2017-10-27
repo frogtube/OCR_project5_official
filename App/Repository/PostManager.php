@@ -11,12 +11,12 @@ namespace Model;
 use Entity\Post;
 use MyFramework\PDOFactory;
 
-class PostsManager extends PDOFactory
+class PostManager extends PDOFactory
 {
 
     public function getList()
     {
-        $req = $this->getPDO()->query('SELECT * FROM articles');
+        $req = $this->getPDO()->query('SELECT * FROM post');
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post');
         $data = $req->fetchAll();
         return $data;
@@ -24,7 +24,7 @@ class PostsManager extends PDOFactory
 
     public function getUnique($slug)
     {
-        $req = $this->getPDO()->prepare('SELECT * FROM articles WHERE slug = :slug');
+        $req = $this->getPDO()->prepare('SELECT * FROM post WHERE slug = :slug');
         $req->bindValue(':slug', (string) $slug, \PDO::PARAM_STR);
         $req->execute();
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Entity\Post');
@@ -39,14 +39,14 @@ class PostsManager extends PDOFactory
 
     public function delete($slug)
     {
-        $this->getPDO()->exec('DELETE FROM articles WHERE id = '.(string) $slug);
+        $this->getPDO()->exec('DELETE FROM post WHERE id = '.(string) $slug);
     }
 
     public function executeSave($post)
     {
 
         $req = $this->getPDO()->prepare('
-            UPDATE articles 
+            UPDATE post 
             SET id = :id, author= :author, title = :title, slug = :slug, content = :content, modificationDate = NOW() 
             WHERE id = :id'
         );
@@ -63,7 +63,7 @@ class PostsManager extends PDOFactory
     public function executeAdd($post)
     {
         $req = $this->getPDO()->prepare('
-            INSERT INTO articles 
+            INSERT INTO post 
             SET author= :author, title = :title, slug = :slug, content = :content, creationDate = NOW()'
         );
 
@@ -77,7 +77,7 @@ class PostsManager extends PDOFactory
 
     public function executeDelete($post)
     {
-        $this->getPDO()->exec('DELETE FROM articles WHERE id = '.(int) $post->id());
+        $this->getPDO()->exec('DELETE FROM post WHERE id = '.(int) $post->id());
     }
 }
 

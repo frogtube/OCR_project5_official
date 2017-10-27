@@ -41,7 +41,6 @@ class Router
         // check a potential match on each routes array entry
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route)
         {
-            var_dump($route);
             // If it does find a match
             if($route->match($this->url)) {
                 return $route->call();

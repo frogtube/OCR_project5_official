@@ -13,6 +13,7 @@ use MyFramework\Router\Router;
 use Post\PostController;
 use Appdefault\DefaultController;
 
+
 class Application
 {
     protected $name;
@@ -46,6 +47,7 @@ class Application
         });
 
         // Display a selected article
+
         $router->get('/posts/:slug', function() {
             $controller = new PostController;
             $controller->show();
@@ -54,6 +56,7 @@ class Application
         // Modifying an article with a form
         $router->get('/posts/edit/:slug', function() {
             $controller = new PostController;
+
             $controller->update();
         });
 
@@ -64,6 +67,7 @@ class Application
         });
 
         // Create a new article with a form
+
         $router->get('/new', function() {
             $controller = new PostController;
             $controller->create();

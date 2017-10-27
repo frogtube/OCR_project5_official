@@ -15,6 +15,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             'Twig\\' => 5,
         ),
+
         'P' => 
         array (
             'Post\\' => 5,
@@ -28,6 +29,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             'Entity\\' => 7,
         ),
+
         'C' => 
         array (
             'Config\\' => 7,
@@ -44,6 +46,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
+
         'Post\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Post',
@@ -67,6 +70,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         'Appdefault\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Appdefault',
+
         ),
         'App\\' => 
         array (
@@ -90,6 +94,7 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
             $loader->prefixLengthsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixesPsr0;
+
 
         }, null, ClassLoader::class);
     }

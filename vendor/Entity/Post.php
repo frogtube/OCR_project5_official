@@ -33,6 +33,10 @@ class Post
         return !(empty($this->author) || empty($this->title) || empty($this->content) || empty($this->slug));
     }
 
+    public function isNew()
+    {
+        return empty($this->id);
+    }
 
     public function id() { return $this->id; }
 
@@ -148,7 +152,6 @@ class Post
             }
         }
     }
-
 
 
 }

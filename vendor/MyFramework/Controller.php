@@ -23,7 +23,6 @@ class Controller
             'title' => $title,
             'posts' => $variables
         ));
-
     }
 
     public function notFound()

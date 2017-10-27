@@ -14,59 +14,69 @@ use MyFramework\Router\Router;
 class Application
 {
     protected $name;
-    protected $HTTPResponse;
-    protected $HTTPRequest;
 
     public function __construct()
     {
         $this->name = '';
-        $this->HTTPResponse = new HTTPRequest;
-        $this->HTTPRequest = new HTTPResponse ;
     }
 
     public function getController()
     {
+        // Router Initialization
         $router = new Router($_GET['url']);
+
+        // Homepage
         $router->get('/', function() {
             $homePath = ROOT . '/App/Home.php';
             require $homePath;
         });
+
+        // Display the full list of articles
         $router->get('/posts', function() {
             $controller = new PostsController();
             $controller->index();
         });
-        $router->get('/posts/:slug', function($id) {
+
+        // Display the selected article
+        $router->get('/posts/:slug', function() {
             $controller = new PostsController;
             $controller->show();
-           /* ?>
-            <form action="" method="post">
-                <input  type="text" name="name">
-                <button type="submit">Envoyer</button>
-            </form>
-
-            <?php
-           */
         });
 
-        $router->post('/posts/:slug', function($id) { echo 'Poster pour l\'article ' . $id . print_r($_POST, true); });
+        // Form for modifying an article
+        $router->get('/posts/edit/:slug', function() {
+            $controller = new PostsController;
+            $controller->update();
+        });
+
+        // Saving modifications of an article to database
+        $router->post('/posts/edit/:slug', function() {
+            $controller = new PostsController;
+            $controller->save();
+        });
+
+        // Form to create a new article
+        $router->get('/new', function() {
+            $controller = new PostsController;
+            $controller->create();
+        });
+
+        // Adding a new article to database
+        $router->post('/new', function() {
+            $controller = new PostsController;
+            $controller->add();
+        });
+
+        // Deleting an article from database
+        $router->post('/posts/:slug', function() {
+            $controller = new PostsController;
+            $controller->delete();
+        });
 
         $router->run();
     }
 
-    public function run() { echo '123'; }
+    public function run() { $this->getController(); }
 
-    public function HTTPResponse()
-    {
-        return $this->HTTPResponse;
-    }
-
-    public function HTTPRequest()
-    {
-        return $this->HTTPRequest;
-    }
-
-    public function name()
-    {
-        return $this->name;
-    }
+    public function name() { return $this->name; }
 }

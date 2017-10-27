@@ -1,5 +1,5 @@
 <?php
-namespace Posts\Views\Templates;
+namespace Posts\Views;
 
 ?>
 

@@ -7,26 +7,34 @@
  */
 namespace MyFramework;
 
+use Appdefault\DefaultController;
+
 class Controller
 {
     protected $viewPath;
     protected $template;
 
-    public function render($view, $variables = [])
+    public function startTwig($viewPath, $view, $variables, $varname, $title, $stylePath)
     {
-        ob_start();
-        // Allows variables transfer from PostsController (with compact function)
-        extract($variables);
-        require($this->viewPath . $view . '.php');
-        $content = ob_get_clean();
-        require($this->viewPath . 'Templates/' . $this->template . '.php');
+        $loader = new \Twig_Loader_Filesystem($viewPath);
+        $twig = new \Twig_Environment($loader, [
+            'cache' => false // ROOT . '/tmp' in production
+        ]);
+
+        // Adding twig extension for text manipulation
+        $twig->addExtension(new \Twig_Extensions_Extension_Text());
+
+        echo $twig->render($view, array(
+            'title' => $title,
+            $varname => $variables,
+            'stylePath' => $stylePath
+        ));
     }
 
-    /*
     public function notFound()
     {
         header('HTTP/1.0 404 Not Found');
-        die('Page not found');
+        $controller = new DefaultController();
+        $controller->postDoesntExists();
     }
-    */
 }

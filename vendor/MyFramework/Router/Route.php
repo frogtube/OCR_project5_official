@@ -9,6 +9,8 @@
 namespace MyFramework\Router;
 
 
+use Appdefault\DefaultController;
+
 class Route
 {
     private $path;
@@ -26,7 +28,7 @@ class Route
     {
         // initial and final / removed from url
         $url = trim($url, '/');
-        // replacing :id parameter by regular expression
+        // replacing :slug parameter by regular expression
         $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
         // Check match between regex and url ('i' flag for case insensitive). Matches saved into $matches array
         $regex = "#^$path$#i";
@@ -45,6 +47,13 @@ class Route
 
     public function call()
     {
+        // Call the callable method of matching url
         return call_user_func_array($this->callable, $this->matches);
+    }
+
+    public function noMatchingRoute()
+    {
+        $controller = new DefaultController();
+        $controller->pageDoesntExists();
     }
 }

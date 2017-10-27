@@ -1,0 +1,29 @@
+{% block form %}
+    <form action="" method="post">
+        <p>
+            <label>Auteur</label>
+            <input type="text" name="author" value="{{ posts.author }}" /><br />
+
+            <label>Titre</label><input type="text" name="title" value="{{ posts.title }}" /><br />
+            <label>Slug</label><input type="text" name="slug" value="{{ posts.slug }}" /><br />
+
+            <label>Contenu</label><textarea rows="8" cols="60" name="content">{{ posts.content }}</textarea><br />
+
+            {% if posts.id is defined %}
+                <input type="hidden" name="id" value="{{ posts.id }}" />
+                <input type="submit" value="Modifier" name="modifier" />
+            {% else %}
+                <input type="submit" value="Ajouter" />
+            {% endif %}
+        </p>
+    </form>
+
+    <form action="../{{ post.slug}}
+        {% if posts.slug is empty %}
+            {{ 'web/posts' }}
+        {% endif %}
+        <input type="submit" value="Annuler" />
+    </form>
+{% endblock %}
+
+

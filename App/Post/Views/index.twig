@@ -1,0 +1,29 @@
+{% extends 'layout.twig' %}
+
+
+{% block head %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Je suis la page index</h2>
+
+    <p>Voici les derniers articles</p>
+
+        {% for post in posts %}
+
+            <h2><a href="../web/posts/{{ post.slug }}">{{ post.title }}</a></h2>
+            <p>Dernière modification : {{ post.modificationDate }}</p>
+            <p>Auteur : {{ post.author }}</p>
+            <p>Chapo : {{ post.slug }}</p>
+
+        {% endfor %}
+
+    <form action="new">
+        <input type="submit" value="New article" />
+    </form>
+
+{% endblock %}
+
+

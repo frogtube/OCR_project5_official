@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+
+
+{% block head %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Je suis la page show</h2>
+
+        <h2>{{ posts.title }}</h2>
+        <p>Dernière modification : {{ posts.modificationDate }}</p>
+        <p>Auteur : {{ posts.author }}</p>
+        <p>Chapo : {{ posts.slug }}</p>
+        <p>{{ posts.content }}</p>
+
+    <form action="edit/{{ posts.slug }}">
+        <input type="submit" value="Modifier" />
+    </form>
+
+    <form action="../posts">
+        <input type="submit" value="Retour" />
+    </form>
+
+    <form action="../posts/delete" method="post">
+        <input type="hidden" name='id' value="{{ posts.id }}" />
+        <button type="submit" href="../posts/delete/{{ posts.id }}" >Supprimer</button>
+    </form>
+
+{% endblock %}
+

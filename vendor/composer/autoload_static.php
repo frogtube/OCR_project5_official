@@ -6,7 +6,16 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
 {
+    public static $files = array (
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Twig\\' => 5,
+        ),
+
         'P' => 
         array (
             'Post\\' => 5,
@@ -20,21 +29,24 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             'Entity\\' => 7,
         ),
-        'D' => 
-        array (
-            'Default\\' => 8,
-        ),
+
         'C' => 
         array (
             'Config\\' => 7,
         ),
         'A' => 
         array (
+            'Appdefault\\' => 11,
             'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+
         'Post\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Post',
@@ -51,17 +63,28 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         array (
             0 => __DIR__ . '/../..' . '/App/Entity',
         ),
-        'Default\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App',
-        ),
         'Config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Config',
         ),
+        'Appdefault\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Appdefault',
+
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
         ),
     );
 
@@ -70,6 +93,8 @@ class ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6f4ced8d4705f13e7881e267df9f8a96::$prefixesPsr0;
+
 
         }, null, ClassLoader::class);
     }

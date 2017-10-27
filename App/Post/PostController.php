@@ -14,9 +14,11 @@ use MyFramework\Controller;
 
 class PostController extends Controller
 {
+    protected $viewPath = ROOT . '/App/Post/views';
+
     public function __construct()
     {
-        $this->viewPath = ROOT . '/App/Post/Views/';
+        $this->viewPath;
         $this->template = 'layout';
     }
 
@@ -24,8 +26,7 @@ class PostController extends Controller
     {
         $db = new PostManager();
         $posts = $db->getList();
-        // Compact function allows variables transfer
-        $this->render('index', compact('posts'));
+        $this->startTwig($this->viewPath, 'index.twig', $posts, 'Blog');
     }
 
     public function show()
@@ -36,11 +37,11 @@ class PostController extends Controller
         $post = $db->getUnique($slug);
         if(!$post == null)
         {
-            // Compact function allows variables transfer
-            $this->render('show', compact('post'));
+            $this->startTwig($this->viewPath,'show.twig', $post, 'Blog | ' . $slug);
         }
         else
-        {// If null is returned
+        {
+            // If null is returned
             $this->notFound();
         }
     }
@@ -53,8 +54,7 @@ class PostController extends Controller
         $post = $db->getUnique($slug);
         if(!$post == null)
         {
-            // Compact function allows variables transfer
-            $this->render('modify', compact('post'));
+            $this->startTwig($this->viewPath,'modify.twig', $post, 'Blog | ' . $slug);
         }
         else
         {// If null is returned
@@ -64,7 +64,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $this->render('create', compact('post'));
+        $this->startTwig($this->viewPath,'create.twig', $post = null, 'Blog | New article');
     }
 
     public function save()
@@ -81,7 +81,6 @@ class PostController extends Controller
         $db = new PostManager();
         $db->executeAdd($post);
         header("Location: ../web/posts/" . $post->slug());
-
     }
 
     public function delete()
